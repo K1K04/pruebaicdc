@@ -13,7 +13,7 @@ pipeline {
                 }
             }
             stages {
-                stage('Clone') {
+                stage('Clonee') {
                     steps {
                         git branch:'master',url:'https://github.com/K1K04/pruebaicdc.git'
                     }
