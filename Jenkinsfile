@@ -64,7 +64,7 @@ pipeline {
                 stage ('Despliegue flaskapp'){
                     steps{
                         sshagent(credentials : ['VPS_SSH']) {
-                        sh 'ssh -p 4444-o StrictHostKeyChecking=no debian@popeye.kiko4da.fun "pruebaicdc && git pull && docker-compose down -v && docker pull kiko4/flask-app:latest && docker-compose up -d"'
+                        sh 'ssh -p 4444 -o StrictHostKeyChecking=no debian@popeye.kiko4da.fun "pruebaicdc && git pull && docker-compose down -v && docker pull kiko4/flask-app:latest && docker-compose up -d"'
                         }
                     }
                 }
