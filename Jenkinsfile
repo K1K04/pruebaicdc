@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        IMAGEN = "alehache/flaskapp"
+        IMAGEN = "kiko4/flask-app"
         USUARIO = 'USER_DOCKERHUB'
     }
     agent none
@@ -15,7 +15,7 @@ pipeline {
             stages {
                 stage('Clone') {
                     steps {
-                        git branch:'main',url:'https://github.com/Alehache97/flaskapp.git'
+                        git branch:'main',url:'https://github.com/K1K04/pruebaicdc.git'
                     }
                 }
                 stage('Install') {
@@ -63,8 +63,8 @@ pipeline {
             stages {
                 stage ('Despliegue flaskapp'){
                     steps{
-                        sshagent(credentials : ['SSH_KEY']) {
-                        sh 'ssh -o StrictHostKeyChecking=no debian@pibetis.macale.es "cd flaskapp && git pull && docker-compose down -v && docker pull alehache/flaskapp:latest && docker-compose up -d"'
+                        sshagent(credentials : ['VPS_SSH']) {
+                        sh 'ssh -p 4444-o StrictHostKeyChecking=no debian@popeye.kiko4da.fun "cd flaskapp && git pull && docker-compose down -v && docker pull kiko4/flask-app:latest && docker-compose up -d"'
                         }
                     }
                 }
@@ -73,7 +73,7 @@ pipeline {
     }    
     post {
         always {
-        mail to: 'alejandroherrera140697@gmail.com',
+        mail to: 'kiko4da4@gmail.com',
         subject: "Estado del pipeline: ${currentBuild.fullDisplayName}",
         body: "El despliegue ${env.BUILD_URL} ha tenido como resultado: ${currentBuild.result}"
         }
